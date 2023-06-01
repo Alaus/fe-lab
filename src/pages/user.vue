@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
+    <div class="user-name">姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
     <div>token：{{ token }}</div>
     <div>getter值：{{ newName }}</div>
     <button @click="handleUser">更新用户</button>
@@ -34,3 +34,9 @@ const handleToken = () => {
   updateToken('23234');
 };
 </script>
+
+<style lang="scss">
+.user-name {
+  color: $test-color;
+}
+</style>
