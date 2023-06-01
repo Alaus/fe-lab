@@ -7,7 +7,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
   if (!localStorage.getItem('token') && to.meta.auth) {
     // 此路由需要授权，请检查是否已登录
     // 如果没有，则重定向到登录页面

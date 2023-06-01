@@ -5,6 +5,7 @@ import path from 'path'; //这个path用到了安装的@types/node
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import viteCompression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -24,6 +25,20 @@ export default ({ mode }) => {
         },
       },
     },
+    // 通过() => import()形式加载的组件会自动分包，第三方插件需手动分包
+    build: {
+      rollupOptions: {
+        output: {
+          chunkFileNames: 'static/js/[name]-[hash].js',
+          entryFileNames: 'static/js/[name]-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'pinia'],
+            elementIcons: ['@element-plus/icons-vue'],
+          },
+        },
+      },
+    },
     plugins: [
       vue(),
       AutoImport({
@@ -32,6 +47,10 @@ export default ({ mode }) => {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
+      {
+        ...viteCompression(),
+        apply: 'build',
+      },
     ],
     //这里进行配置别名
     resolve: {
