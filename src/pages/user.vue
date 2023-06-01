@@ -3,9 +3,9 @@
     <div class="user-name">姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
     <div>token：{{ token }}</div>
     <div>getter值：{{ newName }}</div>
-    <button @click="handleUser">更新用户</button>
-    <button @click="handleAge">更新年龄</button>
-    <button @click="handleToken">更新token</button>
+    <el-button @click="handleUser">更新用户</el-button>
+    <el-button @click="handleAge">更新年龄</el-button>
+    <el-button @click="handleToken">更新token</el-button>
   </div>
 </template>
 
