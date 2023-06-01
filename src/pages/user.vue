@@ -12,6 +12,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/user'; //路径别名，引入store
+import { getList } from '@/apis/user';
+getList({ id: 2 });
 
 const userStore = useUserStore();
 

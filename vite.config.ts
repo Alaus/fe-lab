@@ -10,6 +10,20 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 export default ({ mode }) => {
   console.log('mode', loadEnv(mode, process.cwd()).VITE_BASE_URL); //127.0.0.1:9000/api
   return defineConfig({
+    server: {
+      host: '0.0.0.0',
+      port: 8080,
+      open: true,
+      https: false,
+      proxy: {
+        '/api': {
+          target: '要代理的地址',
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
     plugins: [
       vue(),
       AutoImport({
